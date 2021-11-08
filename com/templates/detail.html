@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+   
+    
+    <title>Details</title>
+    <style>
+    .detailBody{
+        background-color:#f2f2f2;
+        padding:4rem;
+        padding-top:8rem;
+    }
+    .fullDetails{
+        display:flex;
+        padding: 1rem;
+        {% comment %} border: 1px solid blue; {% endcomment %}
+        justify-content: center;
+        align-items: center;
+        flex-direction:column;
+    }
+
+    .return{
+        text-align:center;
+        text-decoration:none;
+        font-weight:bold;
+        text-transform:uppercase;
+        margin-top:1rem;
+    }
+    .detailImg{
+        width: 400px;
+        height:300px;
+        object-fit:contain;
+        transition:transform .2s;
+        cursor:pointer;
+    }
+    .detailImg:hover{
+        transform: scale(1.1);
+    }
+
+    .detailBox{
+        display:flex;
+        padding: 1rem;
+        {% comment %} border: 1px solid red; {% endcomment %}
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main{
+       background-color:#fff;
+       box-shadow:1px 3px 5px grey;
+        border-radius:5px;
+        padding:2rem;
+        padding-bottom:3rem;
+    }
+
+    .title{
+        font-size:3.5rem;
+    }
+    .price{
+        font-size:2.5rem;
+        font-weight:bold;
+    }
+    .discount{
+        font-size:1.5rem;
+        padding: .5rem 1rem;
+        box-shadow:1px 2px 5px blue;
+        border-radius:25px;
+        border:1px solid grey;
+        background-color:#989898;
+        color:#fff;
+         display:flex;  
+        justify-content: space-between;
+        align-items: center;
+    }
+    .discount img{
+        width:35px;
+        height:25px;
+        object-fit:contain;
+    }
+    .description{   
+        max-width:650px;
+        text-align:center;
+        font-style:italic;
+        margin-top:2.5rem;
+    }
+    </style>
+</head>
+<body class="detailBody">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12 detailBox">
+                        <img class="detailImg" 
+                        src = "{{ product_object.image }}" alt = "img">
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-6 fullDetails">
+                <div class="row">
+                    <div class="col-md-12 title">
+                            {{ product_object.title}} 
+                    </div>             
+                </div>
+             
+                <div class="row">
+                        <div class="col-md-12 price">
+                            {{ product_object.price}} 
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 discount">
+                           <img src="{% static 'img/tags-solid.svg' %}"></img> 
+                           <span>{{ product_object.discount_price}}</span>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 description">
+                            {{ product_object.description}} 
+                        </div> 
+                    </div>
+            </div>
+
+            <a class="return" href="{% url 'index' %}">Back Home</a>
+            
+       
+        </div>
+    
+    </div>
+
+</body>
+</html>

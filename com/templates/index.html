@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>Home</title>
+    <style>
+        body {
+	        background-image: url("../../static/img/3-36053_blur-wallpaper-hd-background-wallpaper-hd.jpg");
+            background-repeat:no-repeat;
+            background-size:cover;
+            
+} 
+    .marie{
+        background-color:white;
+        max-width: 1200px; margin:0 auto
+    }
+
+    .doMove a{
+        transition: margin-left .2s;
+    }
+
+    .doMove:hover a{
+        margin-left:.5rem;
+    }
+    #cart {
+        transition: all 0.2s;
+        cursor:pointer;
+    }
+    #cart:hover{
+        transform: scale(1.1);
+        font-weight:bolder;
+    }
+
+    a:hover, a:hover span{
+        text-decoration:none
+    }
+    .popover-body{
+        box-shadow:1px 2px 3px grey;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background-color:ghostwhite;
+
+
+    }
+
+    .popover-body h6{
+text-align:center;
+font-weight:500;
+width:100%;
+    }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 " style= "border:0px; "> 
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between align-items-center";>
+                    <div class="doMove">
+                        <a href = "{% url 'index' %}"><img src = "{% static 'img/carts.png' %}" style="width:50px; height:50px;">
+                        <span class="ml-2 font-weight-bold text-secondary">SCAMCART</span>
+                        </a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    </div>
+                    <div class="collapse navbar-collapse ml-3 align-self-start col-md-9" id="navbarNav">
+                        <ul class="navbar-nav d-flex justify-content-around align-items-center w-100">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'index' %}" style= "color:#5E5C8D;"><b>Home</b> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <button id="cart" type="button"  style= "color:white;"
+                                data-html="true" class="btn btn-secondary example-popover" 
+                                data-container="body"  tabindex="0" data-toggle="popover" data-placement="bottom"
+                                 data-content="Items in cart.">
+                                   Cart
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                        </ul>
+                    </div>
+            </nav>
+            
+            </div>
+
+        </div>
+        <div class="row mb-3 marie " style="background-color: #FFF">
+            <div class="col-md-12">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-items-center">
+                         <div class="col">
+                            <input type="search" name='item_name' placeholder="Search for products" class="form-control form-control-borderless">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div> 
+        <div class="row"> 
+                {% for product in product_objects %}
+               <div class = "col-md-3 mt-2"> 
+                 <div class = "card"> 
+                    <img src="{{ product.image }}" class="card-img-top">  
+                    <div class = "card-body text-center mb-2"> 
+                        <div id="nm{{product.id}}" class ="card-title text-center"> {{ product.title }}</div>
+                        <div class="card-text text-center" id="price{{product.id}}"> {{ product.price }} </div>
+                        <a  href="detail/{{product.id}}" class="btn btn-warning mt-3">View</a>
+                        <button id="{{product.id}}" class="btn atc btn-warning text-center mt-3">Add to cart</button>
+                    </div>
+                 </div>
+                </div> 
+                {% endfor %}
+        </div>
+
+        <div class="row w-100 mt-3"> 
+            <div class="col-md-3 offset-md-4 mx-auto "> 
+                <ul class="pagination">
+                    {% if product_objects.has_previous %}
+                        <li class="page-item">
+                            <a class = "page-link" href="?page={{ product_objects.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a  class = "page-link" href="?page={{ product_objects.number }}">Current</a>
+                    </li>
+
+
+                    {% if product_objects.has_next %}
+                         <li class="page-item">
+                            <a  class = "page-link" href="?page={{ product_objects.next_page_number }}">Next</a>
+                        </li>
+                     {% endif %}
+                </ul>
+
+        
+            </div>
+        </div>
+     </div>
+<script type="text/javascript">
+
+    console.log('This is working');
+
+    if (localStorage.getItem('cart')==null){
+        var cart = {};
+    }
+    else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+
+    $(document).on('click', '.atc', function(){
+        console.log('The add to cart button is clicked'); 
+        var item_id = this.id.toString();
+        console.log(item_id);
+        console.log(`The item clicked has id = ${item_id}`);
+
+        if(cart[item_id]!=undefined){
+
+            quantity = cart[item_id][0] + 1;
+            cart[item_id][0] = quantity;
+            cart[item_id][2] =   cart[item_id][2] + parseFloat(document.getElementById("price"+item_id).innerHTML);  
+
+              //price = document.getElementById("price"+item_id).innerHTML;
+            //price = parseFloat(document.getElementById("price"+item_id).innerHTML);
+            //console.log(price)        
+        }
+        else{
+            console.log(cart)
+             quantity = 1;
+             console.log(item_id);
+             console.log(`price${item_id}`)
+             let x = document.getElementById(`price${item_id}`);
+             console.log(x);
+
+           // price = parseFloat(document.getElementById("price"+item_id).innerHTML);
+
+            price = parseFloat(document.getElementById("price"+item_id).innerHTML);
+            console.log(price)
+
+            name =  document.getElementById("nm"+item_id).innerHTML;
+            cart[item_id] = [quantity,name,price];
+        }
+       
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById("cart").innerHTML= "cart("+ Object.keys(cart).length +")";
+        
+    });
+ 
+      
+    DisplayCart(cart);  
+    function DisplayCart(cart){
+        var cartstring ="";
+        cartstring +="<h5>Items in Cart</h5>";
+        var cartIndex = 1;
+        for(var x in cart){
+            var stock = document.getElementById('nm'+x).innerHTML;
+            cartstring +="<h6><small>" + "id " + x + stock + " Qty: " + cart[x] +"</small></h6>";
+    
+        }
+        console.log(cartstring) 
+        cartstring += "<a href='/checkout'><button  style='color:blue;' class='btn btn-warning' id='checkout'><h6><small>Checkout</small></h6></button></a>";
+        document.getElementById("cart").setAttribute('data-content', cartstring);
+        $('[data-toggle="popover"]').popover();
+        $('.popover-dismiss').popover({
+          trigger: 'focus'
+        })
+        
+      
+    };
+
+    {% comment %} const btn = document.getElementById("cart")
+    function myScript(){
+        console.log('you be scam!')
+    };
+    btn.addEventListener("mouseover", myScript); {% endcomment %}
+
+</script>
+</body>
+
+</html>

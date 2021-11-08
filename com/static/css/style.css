@@ -1,0 +1,20 @@
+.card-text{
+    color:rgb(12, 126, 146);
+    font-weight: 450;
+}
+
+.card-title{
+    color:#382072;
+    font-weight: 900;
+}
+.text-center{
+    text-align:center !important;
+}
+.return{
+    text-align:center !important; 
+    text-decoration:none;
+    font-weight:bold;
+    text-transform:uppercase;
+    margin-top:1rem;
+    width:100vw;
+  }
